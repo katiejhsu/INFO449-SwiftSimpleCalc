@@ -44,7 +44,7 @@ func calculate(_ args: [String]) -> Int {
             case "%":
                 return first % second
             default:
-                return 0
+                break // move to next block if not a math operator
             }
         }
     switch args.last {
@@ -55,7 +55,7 @@ func calculate(_ args: [String]) -> Int {
                 return 0
             } else {
                 var sum = 0
-                for i in 0...(args.count - 1) {
+                for i in 0..<args.count - 1 {
                     sum = sum + (Int(args[i]) ?? 0)
                 }
                 return sum / (args.count - 1)
@@ -76,12 +76,13 @@ func calculate(_ args: [String]) -> Int {
             }
             
         default:
-            return 0
+            return Int(args[0]) ?? 0 //final fallback
         }
 }
 
 func calculate(_ arg: String) -> Int {
-    return -1
+    let argsArray = arg.split(separator: " ").map { String($0) } // creates an array by seperating the string into an array, using split auto ignores extra spaces
+    return calculate(argsArray) // send this new array into the other calculate function
 }
 
 //: Below this are the test expressions/calls to verify if your code is correct.
