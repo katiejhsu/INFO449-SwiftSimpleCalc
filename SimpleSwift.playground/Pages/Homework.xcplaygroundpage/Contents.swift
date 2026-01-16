@@ -27,7 +27,57 @@ print("Welcome to the UW Calculator Playground")
 //: For this latter set of operations, it is safe to assume that `["count"]` (with no additional arguments) is 0, `["avg"]` is also 0, and `["fact"]` is 0. `["1", "fact"]` should return 1, and `["0", "fact"]` should also return 1. (Yes, 0-factorial is 1. True story.)
 //: 
 func calculate(_ args: [String]) -> Int {
-    return -1
+    if args.count == 3 {
+        let first = Int(args[0]) ?? 0 // convert String to Int for operations
+        let second = Int(args[2]) ?? 0
+        
+        // handle traditional expressions
+        switch args[1] {
+            case "+":
+                return first + second
+            case "-":
+                return first - second
+            case "*":
+                return first * second
+            case "/":
+                return first / second
+            case "%":
+                return first % second
+            default:
+                return 0
+            }
+        }
+    switch args.last {
+        case "count":
+            return args.count - 1
+        case "avg":
+            if args.count < 2 {
+                return 0
+            } else {
+                var sum = 0
+                for i in 0...(args.count - 1) {
+                    sum = sum + (Int(args[i]) ?? 0)
+                }
+                return sum / (args.count - 1)
+            }
+        case "fact":
+            if args.count < 2 {
+                return 0
+            } else {
+                let n = Int(args[0]) ?? 0
+                if n == 0 {
+                    return 1
+                }
+                var result = 1
+                    for i in 1...n {
+                        result = result * i
+                    }
+                return result
+            }
+            
+        default:
+            return 0
+        }
 }
 
 func calculate(_ arg: String) -> Int {
